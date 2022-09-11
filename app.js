@@ -2,6 +2,8 @@ import express from "express";
 import config from "config";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser"; // httpOnly Cookies, die mit Credentials gesendet wurden, lesen.
+import path, {dirname} from "path";
+import {fileURLToPath} from "url";
 
 
 //============================================================//
@@ -34,11 +36,14 @@ import cardRoutes from "./routes/card.js";
 
 //=============================================//
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 let app = express();
 
 const PORT = config.get("port");
 
-let port = 5000; /*process.env.PORT || PORT || 3000*/
+const port = process.env.PORT || 5000;
 
 let mongoURL =
   "mongodb://Artem:hailtotheking666@cluster0-shard-00-00.cqwfy.mongodb.net:27017,cluster0-shard-00-01.cqwfy.mongodb.net:27017,cluster0-shard-00-02.cqwfy.mongodb.net:27017/?ssl=true&replicaSet=atlas-ojmnnw-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -101,6 +106,14 @@ start();
 );*/
 
 /*app.use(varMiddleware);*/
+
+/*=============================Statischer Ordner, der bei den Anfragen zurückgegeben wird======================*/
+
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "public", "index.html"));
+});
 
 //==============================================================================================================================//
 
