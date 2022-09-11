@@ -1,0 +1,873 @@
+// Nicht alles, was Breite ist, wurde in Pixel angegeben.
+// Wird Rem immer von font-size gerechnet? Also wenn ich angebe: html: font-size: 62.5% (10px) und dann rem für ein padding, wird dieser vom font size im html gerechnet?
+// почему в header  "left: 0; right: 0;"  убирает карту покупок сверху.
+// почему иногда width в rem, а иногда в %?
+// в card items container - // не понимаю, почему при top: 100% она стоит именно так?
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"); // шрифты в css через импорт.
+
+:root {
+  // auch in css gibt es Variablen, nicht nur in scss. Die globalen Variablem werden in einem :root Selektor deklariert
+  --main-color: #d3ad7f; // Man kann auch Variablen in jedem Regalsatz eines Selektors angeben. Dann sind sie nur in diesem Element
+  --black: #13131a; // verfügbar unch für die Children des Elements.
+  --bg: #010103;
+  --border: 0.1rem solid rgba(255, 255, 255, 0.3);
+}
+
+// Variablen sind nicht nur deshalb gut, weil man einer HEX-Farbe einen Namen geben kann, den man besser merkt und nicht, weil man Sachen
+// kürzer schreiben kann, sondern auch, weil man die Eigenschaften dann sehr schnell ändern kann, indem man den Wert der Variable ändert.
+
+* {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; // Eigenschaften width und height sind inklusive padding und border.
+  outline: none;
+  border: none; // Outline - wie border, nur gleich für alle Seiten + kein Einfluss auf die Größe des Tags
+  text-decoration: none; // Inputs haben standart border und outline ist die Markierung, die beim Focus im Input kommt
+  text-transform: capitalize; // jeder erste Buchstabe in jedem Wort groß geschrieben.
+  transition: 0.2s linear; // das heißt, dass alle css Animationen diese Eigenschaften haben werden.
+}
+
+html {
+  font-size: 62.5%; // verkleinert die Standart 16px auf 62.5%(10px)
+  overflow-x: hidden; // damit kein horizontaler Scroller entsteht. (obwohl auch ohne keiner entsteht)
+  scroll-padding-top: 9rem; // funktioniert wie die Scrollen - Funktion im JS, aber ohne JS.
+  scroll-behavior: smooth; // stellt das Scrollen ein auf smooth.
+} // Aber 9rem sind jetzt 10px*9? Also 90px?
+
+// scroll-behavior beeinflusst den Verhalten des automatischen Scrollen, wenn die Seite beim drücken auf ein Button gescrollt wird.
+
+html::-webkit-scrollbar {
+  //
+  width: 0.8rem;
+}
+
+html::-webkit-scrollbar-track {
+  //
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  //
+  background: #fff;
+  border-radius: 5rem;
+  &:hover {
+    background: rgb(165, 162, 162);
+  }
+}
+
+body {
+  background: var(--bg); // so verwendet man die oben angegebene Variablen.
+}
+
+section {
+  padding: 2rem 7%; // Breite mit % und Höhe mit rem.
+}
+
+.heading {
+  text-align: center; // h1 - ist ein Block - Element, deshalb wird der Text damit in die Mitte gestellt. (block-Element nimmt die ganze Breite ein).
+  color: #fff;
+  text-transform: uppercase; // uppercase wird vererbt.
+  padding-bottom: 3.5rem;
+  font-size: 4rem;
+  span {
+    color: var(--main-color);
+    text-transform: uppercase;
+  }
+}
+
+.btn {
+  margin-top: 1rem;
+  display: inline-block;
+  padding: 0.9rem 3rem;
+  font-size: 1.7rem;
+  color: #fff;
+  background: var(--main-color);
+  cursor: pointer;
+  &:hover {
+    letter-spacing: 0.2rem; // Das ist eine gute Möglichkeit für einen :hover, dadurch wird der Abstand zwischen den Buchstaben größer und der Button wird
+  } // Dadurch auch länger.
+}
+
+#menu-btn {
+  display: none; // habe diesen Selektor nach oben verschoben, weil sonst @media query nicht funktioniert hat.
+} // Weil der Selektor zu lange ist und ich weiss nicht wie ich den in @media länger machen soll.
+
+/*=====================================================================================================================================*/
+
+.header {
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 7%; // 10*1.5 == 15px und 7% von der Fensterbreite (weil % von der Breite des Container gerechnet wird und Container ist Body)
+  border-bottom: var(--border);
+  position: fixed;
+  top: 0; // что делает top: 0?.
+  left: 0;
+  right: 0; // эквивалентно width: 100%, но здесь это еще убирает карту покупок справа. Пока не знаю почему.
+  z-index: 1000; // иначе, картинки в Blogs, когда их увеличиваешь, налезаюь на header.
+  .logo {
+    img {
+      height: 6rem; // = 60px, то есть все это считается от свойтсва font-size.
+    }
+  }
+  .navbar {
+    .nav-item {
+      margin: 0 1rem;
+      font-size: 1.6rem;
+      color: rgb(255, 255, 255);
+      &:hover {
+        color: var(--main-color);
+        border-bottom: 0.1rem solid var(--main-color);
+        padding-bottom: 0.5rem;
+      }
+    }
+    .nav-item-active {
+      margin: 0 1rem;
+      font-size: 1.6rem;
+      color: var(--main-color);
+      border-bottom: 0.1rem solid var(--main-color);
+      padding-bottom: 0.5rem;
+    }
+    .login {
+      color: rgb(255, 255, 255);
+      font-size: 1.6rem;
+      margin-left: 1.6rem;
+
+      border: 0.1rem solid white;
+      padding: 0.6rem 0.6rem 0.6rem 0.6rem;
+      &:hover {
+        color: var(--main-color);
+        border: 0.1rem solid var(--main-color);
+        padding-bottom: 0.6rem;
+      }
+    }
+    .login_active {
+      font-size: 1.6rem;
+      padding: 0.6rem;
+      margin-left: 1.6rem;
+
+      color: var(--main-color);
+      border: 0.1rem solid var(--main-color);
+    }
+    .login.signUp {
+      margin-right: 1.6rem;
+    }
+  }
+  .icons {
+    div {
+      color: #fff;
+      cursor: pointer;
+      font-size: 2.5rem;
+      margin-left: 2rem;
+      &:hover {
+        color: var(--main-color);
+      }
+    }
+    .search-button {
+      background: transparent;
+    }
+  }
+  .search-form {
+    position: absolute;
+    top: 115%;
+    right: 7%; // значить absolute тоже можно задавать в адоптиве, если расстояние в top/bottom и left/right задано в %.
+    background: #fff;
+    width: 50rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    transform: scaleY(
+      0
+    ); // so verschwindet die Suchform und Label und man kann aber dann die Animation mit Scalieren machen
+    transform-origin: top; // legt den Ankerpunkt einer Transformation fest. Der Ankerpunkt ist der Punkt um den die Transformation durchgeführt wird.
+    &.active {
+      // das heißt, sie wird von oben aus gedehnt.
+      transform: scaleY(1);
+    }
+    label {
+      cursor: pointer;
+      font-size: 2.2rem;
+      margin-right: 1.5rem;
+      color: var(--black);
+      &:hover {
+        color: var(--main-color);
+      }
+    }
+    input {
+      height: 100%;
+      width: 100%;
+      font-size: 1.6rem;
+      color: var(--black);
+      padding: 1rem;
+      text-transform: none;
+    }
+  }
+  .cart-container-toggle {
+    position: absolute;
+    top: 100%; // не понимаю, почему при top: 100% она стоит именно так?
+    right: -100%;
+    height: calc(
+      100vh - 9.5rem
+    ); //  выстота контейнера, 100 view height - 95 px (отступ сверху).
+    width: 42rem;
+    background: #fff;
+    padding: 0 1.5rem;
+    &.active {
+      right: 0;
+    }
+    .cart-items-container-toggle {
+      .totalLine {
+        height: 2px;
+        width: 100%;
+        background-color: black;
+        display: block;
+      }
+
+      .totalPrice_toggle {
+        margin-top: 2rem;
+        font-size: 2rem;
+        text-align: right;
+        margin-right: 25%;
+      }
+    }
+    .cart-item-toggle {
+      position: relative;
+      margin: 2rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem; // der Abstand nur zwischen den Flex-items, ohne Leeren Platz vorne und hinten.
+      .fa-times {
+        position: absolute; // это можно значит так устанавливать в адоптиве, даже если top и right в rem.
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
+        color: var(--black);
+        &:hover {
+          color: var(--main-color);
+        }
+      }
+      img {
+        height: 7rem;
+      }
+      .content-toggle {
+        h3 {
+          font-size: 2rem;
+          color: var(--black);
+          padding-bottom: 0.5rem;
+        }
+        .price {
+          font-size: 1.5rem;
+          color: var(--main-color);
+        }
+      }
+      .cart_item_amount_toggle {
+        font-weight: bold;
+        border: 3px solid salmon;
+        border-radius: 35%;
+        padding: 1rem;
+        margin-left: 1.3rem;
+        font-size: 1.3rem;
+      }
+    }
+    .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+/*============================================================*/
+//Sign Up Section for Sign Up Page
+/*============================================================*/
+
+.signUp {
+  background: var(--bg);
+  height: 80rem;
+}
+
+.signUp__form {
+  padding: 10rem 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.signUp__input {
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.signUp__input--button {
+  background: var(--bg);
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+/*============================================================*/
+//signed Section for signed.hbs
+/*============================================================*/
+
+.signed {
+  height: 80rem;
+}
+
+.signed__form {
+  padding: 10rem 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.signed__input {
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.signed__input--button {
+  background: var(--bg);
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+/*============================================================*/
+//Success Section for signedValidation.hbs
+/*============================================================*/
+
+.success {
+  height: 40rem;
+  padding-top: 15rem;
+  color: #fff;
+  font-size: 2rem;
+}
+
+/*======================================================================*/
+//login Section login.hbs
+/*======================================================================*/
+
+.login {
+  height: 100rem;
+  color: rgb(255, 255, 255);
+  padding-top: 20rem;
+  padding-bottom: 65rem;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.login__form {
+  padding: 10rem 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login__input {
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.login__input--button {
+  background: var(--bg);
+  border: 1px solid white;
+  color: white;
+  cursor: pointer;
+}
+
+/*============================================================*/
+//Card Section for card.hbs
+/*============================================================*/
+
+.card {
+  height: 100rem;
+  color: rgb(255, 255, 255);
+  padding-top: 20rem;
+  padding-bottom: 65rem;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.cart-items-container {
+  padding-left: 30%;
+  border: var(--border);
+  padding-bottom: 8rem;
+
+  .totalLine {
+    height: 2px;
+    width: 85%;
+    background-color: white;
+    display: block;
+  }
+
+  .totalPrice {
+    margin-top: 2rem;
+    font-size: 2rem;
+    text-align: right;
+    margin-right: 25%;
+  }
+}
+
+.cart-item {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2%;
+  margin: 5rem 0;
+  .content {
+    h3 {
+      margin-bottom: 1rem;
+    }
+    font-size: 1, 6rem;
+    .price {
+      font-size: 2rem;
+    }
+  }
+  .fa-times {
+    font-size: 2rem;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    &:hover {
+      color: var(--main-color);
+    }
+  }
+  .card-item_amount {
+    margin-left: 2rem;
+    border: 3px solid salmon;
+    border-radius: 25%;
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+}
+
+.btn-checkout {
+  color: white;
+}
+
+//==============================================================================================================//
+//Orders Section
+//==============================================================================================================//
+
+.orders {
+  color: white;
+  padding-top: 20rem;
+  height: 100rem;
+}
+
+//===============================================================================================================//
+
+/*==================================================================================*/
+//home section//
+
+.home {
+  min-height: 100vh; // mindestens so hoch wie die Höhe des Browser. Mir ist es nicht eingefallen, als ich
+  display: flex; // diese Linie unten hatte, die ich nicht weg zu machen vermochte.
+  align-items: center;
+  background: url(../images/home-img.jpeg) no-repeat;
+  background-size: cover; // das Bild Maßstabiert sich proportionell, und dehnt sich aus oder die Breite wird abgeschnitten ( wenn die Browserbreite kleiner ist)
+  background-position: center; // das Bild ist in der Mitte ??
+}
+
+.home {
+  .content {
+    max-width: 60rem; // die Maximale größe für die Texte und den Button, aber in rem(genaue größe), nicht in %.
+    h3 {
+      // dabei wird dieses Text sich nicht in die Länge ziehen, bei der Vergrößerung der Browser - Breite.
+      font-size: 6rem;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    p {
+      font-size: 2rem;
+      font-weight: lighter; // verkleinert den Wert von font-weight um 200, zum Beispiel von 400 auf 200.
+      line-height: 1.8;
+      padding: 1rem 0;
+      color: #eee;
+    }
+  }
+}
+
+/*===================================*/
+
+.about {
+  .row {
+    display: flex;
+    align-items: center;
+    background: var(--black);
+    flex-wrap: wrap;
+    .image {
+      // Abkürzung von flex-grow, flex-shrink und flex-basis, Werte für dehnen, zusammenziehen und die (Haupt) Breite des flex-items
+      flex: 1 1 45rem; // Muss später getrennt einmal durchgehen, wie es funktioniert.
+      img {
+        width: 100%; // Hier würd wieder der <img> Tag in einen div mit dem class="img" eingefügt.
+      }
+    }
+    .content {
+      flex: 1 1 45rem; // Muss später getrennt einmal durchgehen, wie es funktioniert.
+      padding: 2rem; // flex hat hier content näher ans image geschoben.
+      h3 {
+        font-size: 3rem;
+        color: #fff;
+      }
+      p {
+        font-size: 1.6rem;
+        color: #ccc;
+        padding: 1rem 0;
+        line-height: 1.8;
+      }
+    }
+  }
+}
+
+/*======================================================================================*/
+
+.menu {
+  .box-container {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(30rem, 1fr)
+    ); // grid-template-columns bestimmt die Anzahl und die Größe der Spalten im Grid-layout
+    gap: 1.5rem; // repeat() Funktion wiederholt die Angegebene Größe die angegebene Male. Mit Auto-fit wiederholt sie solange die angegebene Größe, solange sie passt.
+  } // durch minmax wird eine größe gewählt die zwichen min und max liegt.
+  // gab - der Abstand zwischen grid-Elementen, in diesem Fall vertikal zwischen den Elementen in einer Spalte.
+  .box {
+    padding: 5rem;
+    text-align: center; //irgendwieso schiebt bei diesen Grid-Elementen text-align: center auch das Bild und den Button in die Mitte
+    border: var(--border);
+    &:hover {
+      background: #fff;
+    }
+    img {
+      height: 10rem;
+    }
+    h3 {
+      color: #fff;
+      font-size: 2rem;
+      padding: 1rem 0;
+    }
+    .price {
+      color: #fff;
+      font-size: 2.5rem;
+      padding: 5rem 0;
+      span {
+        color: #fff;
+        font-weight: lighter;
+        font-size: 1.5rem;
+        text-decoration: line-through; // durchgestrichener Text.
+      }
+    }
+  }
+}
+
+.menu .box-container .box:hover > * {
+  // diese zwei Regeln sind nicht soo schön, ich sollte sie in scss Format nochmal umwandeln.
+  color: var(--black);
+}
+
+.menu .box-container .box:hover span {
+  color: var(--black);
+}
+
+/*===========================================================*/
+
+.products .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+  .box {
+    text-align: center;
+    border: var(--border);
+    padding: 2rem;
+    .icons a {
+      height: 5rem;
+      width: 5rem;
+      line-height: 5rem;
+      font-size: 2rem;
+      border: var(--border);
+      color: #fff;
+      margin: 0.3rem;
+      &:hover {
+        background: var(--main-color);
+      }
+    }
+
+    .image {
+      padding: 2.5rem 0;
+      img {
+        height: 25rem;
+      }
+    }
+    .content {
+      h3 {
+        color: #fff;
+        font-size: 2.5rem;
+      }
+      .stars {
+        padding: 1.5rem;
+        i {
+          font-size: 1.7rem;
+          color: var(--main-color);
+        }
+      }
+      .price {
+        color: #fff;
+        font-size: 2.5rem;
+        padding: 0.5rem 0;
+        span {
+          font-size: 1.5rem;
+          text-decoration: line-through;
+          font-weight: lighter;
+        }
+      }
+    }
+  }
+}
+
+.review .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+  .box {
+    border: var(--border);
+    text-align: center; //auch hier werden durch den text-align: center Bilder von Anführungsstrichen in die Mitte mitgezogen.
+    padding: 3rem 2rem;
+    p {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      color: #ccc;
+      padding: 2rem 0;
+    }
+    .user {
+      height: 7rem;
+      width: 7rem;
+      border-radius: 50%;
+      object-fit: cover; // weiss nicht, was das genau macht.
+    }
+    h3 {
+      padding: 1rem 0;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .stars {
+      i {
+        font-size: 1.5rem;
+        color: var(--main-color);
+      }
+    }
+  }
+}
+
+/*===============================================================*/
+
+.contact {
+  .row {
+    display: flex;
+    background: var(--black);
+    flex-wrap: wrap; // heißt, dass beim verkleinern der
+    gap: 1rem; // in diesem Fall - der Abstand zwischen den einzelnen flex - Elementen
+    .map {
+      flex: 1 1 45rem;
+      width: 100%;
+      object-fit: cover;
+    }
+    form {
+      flex: 1 1 45rem;
+      padding: 5rem 2rem;
+      text-align: center;
+      h3 {
+        text-transform: uppercase;
+        font-size: 3.5rem;
+        color: #fff;
+      }
+      .inputBox {
+        display: flex;
+        align-items: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        background: var(--bg);
+        border: var(--border);
+        span {
+          color: #fff;
+          font-size: 2rem;
+          padding-left: 2rem;
+        }
+        input {
+          width: 100%;
+          padding: 2rem;
+          font-size: 1.7rem;
+          color: #fff;
+          text-transform: none;
+          background: none;
+        }
+      }
+    }
+  }
+}
+
+/*================================================================================*/
+
+.blogs .box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  gap: 1.5rem;
+  .box {
+    border: var(--border);
+    &:hover .image img {
+      transform: scale(1.2);
+    }
+    .image {
+      height: 25rem;
+      overflow: hidden;
+      width: 100%;
+    }
+    img {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+    .content {
+      padding: 2rem;
+      .title {
+        font-size: 2.5rem;
+        line-height: 1.5;
+        color: #fff;
+        &:hover {
+          color: var(--main-color);
+        }
+      }
+      span {
+        color: var(--main-color);
+        display: block; // um es auf die neue Zeile zu schieben (Absatz)
+        padding-top: 1rem;
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1.6rem;
+        line-height: 1.8;
+        color: #ccc;
+        padding: 1rem 0;
+      }
+    }
+  }
+}
+
+/*=========================================================================*/
+
+.footer {
+  background: var(--black);
+  text-align: center;
+  .shar {
+    padding: 1rem 0;
+    a {
+      height: 5rem;
+      width: 5rem;
+      line-height: 5rem;
+      font-size: 2rem;
+      color: #fff;
+      border: var(--border);
+      margin: 0.3rem;
+      border-radius: 50%;
+      &:hover {
+        background-color: var(--main-color);
+      }
+    }
+  }
+  .links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    gap: 1rem;
+    a {
+      padding: 0.7rem 2rem;
+      color: #fff;
+      border: var(--border);
+      font-size: 2rem;
+      &:hover {
+        background-color: var(--main-color);
+      }
+    }
+  }
+  .credit {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: lighter;
+    padding: 1.5rem;
+    span {
+      color: var(--main-color);
+    }
+  }
+}
+
+/* media queries */
+
+@media (max-width: 991px) {
+  // Der erste @media Query passt die Seite an die kleinere Bildschirme an indem er
+  html {
+    // die Schriftgröße und die Abstände ändert. Der zweite ist dann für die mobile Geräte gedacht.
+    font-size: 55%;
+  }
+
+  .header {
+    padding: 1.5rem 2rem;
+  }
+  section {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  // Er hat auch diese Größe genommen, die im Buch "responsive Web Design" genannt wurde.
+  #menu-btn {
+    // Weil die Breite aller Handys und moderner Tablets kleiner ist.
+    display: inline-block;
+  }
+
+  .header .navbar {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    background: #fff;
+    width: 30rem;
+    height: calc(100vh - 9.5rem); // was macht das??
+    &.active {
+      right: 0;
+    }
+  }
+
+  .header .navbar a {
+    color: var(--black);
+    display: block;
+    margin: 1.5rem;
+    padding: 0.5rem;
+    font-size: 2rem;
+  }
+
+  .header .search-form {
+    width: 90%;
+    right: 2rem;
+  }
+
+  .home {
+    background-position: left; // das Hintergrundbild fängt links an (die Linke Seite ist an der Linken seite des Browsers) Wahrscheinlich weil man auf dem Bild der Tasse die Buchstaben nicht so gut lesen kann.
+    justify-content: center; // positioniert den <div> mit dem content mittig, sonst ist er links (mit einem Abstand durch den padding beim section-Selektor.
+    text-align: center; //positioniert den Text mittig bzw. schafft eine schönere symmetrische Positionierung.
+    .content {
+      h3 {
+        font-size: 4.5rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 50%;
+  }
+}

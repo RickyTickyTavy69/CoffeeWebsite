@@ -1,0 +1,38 @@
+<section class="orders">
+    <h1>My Orders</h1>
+
+    
+
+    {{#if orders.length}}
+    {{#each orders}}
+        <div class="row">
+            <div class="col">
+                <div class="orders">
+                    <div class="orders-content">
+                        <span class="orders-title">
+                            Order {{_id}}
+                        </span>
+                        <p class="date">{{date}}</p>
+                        <p><em>{{user.name}}</em>({{user.userId.email}})</p>
+                        
+                        <ol>
+                            {{#each items}}
+                                <li>
+                                    {{item.type}} (x <strong>{{item.amount}}</strong>)
+                                </li>
+                            {{/each}}
+                        </ol>
+
+                        <div class="line">  </div>
+
+                        <p> Цена: <span class="price"> {{price}} $</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+    {{else}}
+        <p>You don't have orders yet. Use your chance and order now our tasty and powerfull coffee! Enjoy!</p>
+    {{/if}}
+</section>
+

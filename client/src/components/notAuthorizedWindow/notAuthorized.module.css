@@ -1,0 +1,51 @@
+.window{
+    width: 70%;
+    top: 50%;
+    left: 15%;
+    position: absolute;
+    background-color: rgba(1, 1, 3, 0.8);
+    border: 2px solid darkred;
+}
+
+.message{
+    color: darkred;
+    font-size: 3em;
+    font-weight: 800;
+    margin: 5vh 0 5vh 0;
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5vh;
+    position: relative;
+}
+
+.button{
+    height: 100%;
+    width: 100%;
+    border: 1px solid green;
+    background-color: #09530950;
+    font-size: 2em;
+    padding: 4%;
+    cursor: pointer;
+}
+
+.button_container{
+    width: 15%;
+}
+
+.bright:hover{
+    border: 1px solid green;
+    background-color: #11b711;
+}
+
+.bright{
+    border: 1px solid green;
+    background-color: #0b6e0b;
+}
+
+.darked:hover{
+    opacity: 0.5;
+}

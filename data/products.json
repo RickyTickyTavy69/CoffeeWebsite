@@ -1,0 +1,32 @@
+[
+    {
+        "type": "Latte Macchiato",
+        "price": 2.90,
+        "image": "/public/images/menu-1.png"
+    },
+    {
+        "type": "Espresso Macchiato",
+        "price": 2.90,
+        "image": "/public/images/menu-2.png"
+    },
+    {
+        "type": "Espresso",
+        "price": 1.90,
+        "image": "/public/images/menu-3.png"
+    },
+    {
+        "type": "Cappuccino",
+        "price": 3.00,
+        "image": "/public/images/menu-4.png"
+    },
+    {
+        "type": "Café con leche",
+        "price": 1.90,
+        "image": "/public/images/menu-5.png"
+    },
+    {
+        "type": "Caffee Coretto",
+        "price": 3.00,
+        "image": "/public/images/menu-6.png"
+    }
+]

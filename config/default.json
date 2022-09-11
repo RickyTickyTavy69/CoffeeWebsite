@@ -1,0 +1,8 @@
+{
+  "port": 5000,
+  "jwtSecret": "Hey buddy, i think you got the wrong door the leather-club is two blocks down",
+  "accessTokenSecret": "Hey buddy, i think you got the wrong door the leather-club is two blocks down",
+  "refreshTokenSecret": "fuck you!",
+  "mongoUri": "mongodb://Artem:<hailtotheking666>@cluster0-shard-00-00.9zgjr.mongodb.net:27017,cluster0-shard-00-01.9zgjr.mongodb.net:27017,cluster0-shard-00-02.9zgjr.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-hob86m-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "bcryptSalt": "$2b$10$AtZSTC0ZIGrpfzEVSJvsgO"
+}

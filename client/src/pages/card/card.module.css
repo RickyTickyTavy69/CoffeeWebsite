@@ -1,0 +1,56 @@
+.card_container{
+    max-width: 1200px;
+    color: white;
+    margin: 20vh auto 0 auto;
+    font-size: 2em;
+    text-align: center;
+}
+
+.table_head{
+    display: flex;
+    margin: 5vh auto;
+    max-width: 50%;
+    justify-content: space-between;
+}
+
+.table_head .price{
+    margin-left: 26%;
+}
+
+.total_price{
+    display: flex;
+    margin: 5vh auto;
+    max-width: 30%;
+    justify-content: space-between;
+    font-size: 1.2em;
+}
+
+.total_price_number{
+    color: greenyellow;
+
+}
+
+.product_item{
+    display: flex;
+    margin: 5vh auto;
+    max-width: 50%;
+    justify-content: space-between;
+}
+
+.delete{
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    padding: 1%;
+    cursor: pointer;
+}
+
+.delete:hover{
+    color: black;
+}
+
+.not_auth{
+    color: red;
+    margin: 5vh 0 5vh 0;
+    font-size: 1em;
+}
