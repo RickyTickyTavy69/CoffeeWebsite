@@ -31,28 +31,28 @@ const Header = () => {
   return (
     <div className="header">
       <nav className="navbar navigation">
-        <NavLink href="/" className="logo">
+        <NavLink to="/" className="logo">
           <img src={logo} alt="" />
         </NavLink>
-        <NavLink className="nav-item" href="/">
+        <NavLink className="nav-item" to="/">
           home
         </NavLink>
-        <NavLink className="nav-item" href="#about">
+        <NavLink className="nav-item" to="#about">
           about
         </NavLink>
-        <NavLink className="nav-item" href="#menu">
+        <NavLink className="nav-item" to="#menu">
           menu
         </NavLink>
-        <NavLink className="nav-item" href="#products">
+        <NavLink className="nav-item" to="#products">
           products
         </NavLink>
-        <NavLink className="nav-item" href="#review">
+        <NavLink className="nav-item" to="#review">
           review
         </NavLink>
-        <NavLink className="nav-item" href="#contact">
+        <NavLink className="nav-item" to="#contact">
           contact
         </NavLink>
-        <NavLink className="nav-item" href="/showCard">
+        <NavLink className="nav-item" to="/showCard">
           your card
         </NavLink>
       </nav>
@@ -62,10 +62,10 @@ const Header = () => {
       <nav className="navbar loginbar">
         {redirectToCard && <Redirect to="/card" />}
         {!username && <nav>                        {/*falls es loginUserData nicht gibt wird die Option zum LogIn angezeigt*/}
-          <NavLink className="login" href="/logIn/logIn">
+          <NavLink className="login" to="/logIn/logIn">
             login
           </NavLink>
-          <NavLink className="login signUp" href="/signUp">
+          <NavLink className="login signUp" to="/signUp">
             sign up
           </NavLink>
         </nav>}
@@ -74,7 +74,7 @@ const Header = () => {
             logOut
           </a>*/}
           <button onClick={logout}  className="login"> logOut </button>
-          <NavLink className="nav-item" href="/signUp">
+          <NavLink className="nav-item" to="/signUp">
             You are logged in, {username};
           </NavLink>
         </nav>}
