@@ -1,7 +1,7 @@
 import logo from "../assets/images/logo.png";
 import useRequest from "../hooks/http.hook";
 import {useState} from "react";
-import {Redirect} from "react-router-dom";
+import {Redirect, NavLink} from "react-router-dom";
 
 const Header = () => {
                           // нужен какой то useEffect или передать как параметр, а тут в хедере уже
@@ -31,30 +31,30 @@ const Header = () => {
   return (
     <div className="header">
       <nav className="navbar navigation">
-        <a href="/" className="logo">
+        <NavLink href="/" className="logo">
           <img src={logo} alt="" />
-        </a>
-        <a className="nav-item" href="/">
+        </NavLink>
+        <NavLink className="nav-item" href="/">
           home
-        </a>
-        <a className="nav-item" href="#about">
+        </NavLink>
+        <NavLink className="nav-item" href="#about">
           about
-        </a>
-        <a className="nav-item" href="#menu">
+        </NavLink>
+        <NavLink className="nav-item" href="#menu">
           menu
-        </a>
-        <a className="nav-item" href="#products">
+        </NavLink>
+        <NavLink className="nav-item" href="#products">
           products
-        </a>
-        <a className="nav-item" href="#review">
+        </NavLink>
+        <NavLink className="nav-item" href="#review">
           review
-        </a>
-        <a className="nav-item" href="#contact">
+        </NavLink>
+        <NavLink className="nav-item" href="#contact">
           contact
-        </a>
-        <a className="nav-item" href="/showCard">
+        </NavLink>
+        <NavLink className="nav-item" href="/showCard">
           your card
-        </a>
+        </NavLink>
       </nav>
 
 
@@ -62,21 +62,21 @@ const Header = () => {
       <nav className="navbar loginbar">
         {redirectToCard && <Redirect to="/card" />}
         {!username && <nav>                        {/*falls es loginUserData nicht gibt wird die Option zum LogIn angezeigt*/}
-          <a className="login" href="/logIn/logIn">
+          <NavLink className="login" href="/logIn/logIn">
             login
-          </a>
-          <a className="login signUp" href="/signUp">
+          </NavLink>
+          <NavLink className="login signUp" href="/signUp">
             sign up
-          </a>
+          </NavLink>
         </nav>}
         {username && <nav>                         {/* falls es loginUserData nicht gibt wird die Option zum LogOut angezeigt*/}
           {/*<a className="login" href="/logIn/logIn">
             logOut
           </a>*/}
           <button onClick={logout}  className="login"> logOut </button>
-          <a className="nav-item" href="/signUp">
+          <NavLink className="nav-item" href="/signUp">
             You are logged in, {username};
-          </a>
+          </NavLink>
         </nav>}
         <div className="icons">
           <div className="fas fa-search" id="search-btn"></div>
